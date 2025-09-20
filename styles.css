@@ -1,0 +1,599 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #1e5799, #2989d8);
+    color: #333;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    transition: all 5s ease;
+}
+
+body.night {
+    background: linear-gradient(to bottom, #0a1931, #1a1a2e);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 95%;
+    position: relative;
+    z-index: 20;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #2e8b57;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.instructions {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.flower-counter {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2e8b57;
+    margin-top: 10px;
+}
+
+.garden-container {
+    width: 95%;
+    max-width: 900px;
+    height: 50vh;
+    min-height: 350px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 3px solid #5a3921;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(to bottom, #5a3921, #8B4513);
+    border-top: 2px solid #3d2816;
+}
+
+.grass {
+    position: absolute;
+    bottom: 15%;
+    width: 100%;
+    height: 5%;
+    background: linear-gradient(to bottom, #3cb371, #2e8b57);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.grass:hover {
+    background: linear-gradient(to bottom, #43d87e, #33a562);
+    box-shadow: 0 0 10px rgba(60, 179, 113, 0.5);
+}
+
+.flower {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s;
+    z-index: 10;
+    bottom: 15%; /* Posición base corregida */
+    animation: gentleSway 8s infinite ease-in-out;
+    transform-origin: center bottom;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.flower:hover {
+    transform: scale(1.1);
+    animation: none;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    z-index: 15;
+}
+
+@keyframes gentleSway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+.stem {
+    position: absolute;
+    background: linear-gradient(to bottom, #32CD32, #228B22, #006400);
+    width: 4px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transform-origin: bottom center;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.flower-top {
+    position: absolute;
+    bottom: 0; /* Posición corregida */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.petals-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.petal {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transform-origin: center;
+}
+
+.petal.open {
+    opacity: 0.9;
+}
+
+.petal:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Pétalos de girasol */
+.petal.sunflower {
+    border-radius: 50% 50% 40% 40%;
+    background: linear-gradient(to bottom, #FFD700, #FFA500, #E59400);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Pétalos de gardenia */
+.petal.gardenia {
+    border-radius: 50% 50% 60% 60%;
+    background: linear-gradient(to bottom, #FFFFFF, #F8F8FF, #E6E6FA);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Pétalos de rosa */
+.petal.rose {
+    border-radius: 40% 60% 40% 60%;
+    background: linear-gradient(to bottom, #FF3399, #FF66B2, #FF007F);
+    box-shadow: 0 0 8px rgba(255, 0, 127, 0.3);
+}
+
+/* Pétalos de margarita */
+.petal.daisy {
+    border-radius: 60% 40% 60% 40%;
+    background: linear-gradient(to bottom, #FFFFFF, #F0F8FF, #E6E6FA);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Pétalos de tulipán */
+.petal.tulip {
+    border-radius: 60% 60% 40% 40%;
+    background: linear-gradient(to bottom, #FF3366, #FF6699, #FF0044);
+    box-shadow: 0 0 8px rgba(255, 0, 68, 0.3);
+}
+
+.center {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    animation: pulse 3s infinite ease-in-out;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Centro de girasol */
+.center.sunflower {
+    background: 
+        radial-gradient(circle at 30% 30%, #8B4513, transparent 30%),
+        radial-gradient(circle at 70% 70%, #654321, transparent 30%),
+        radial-gradient(circle, #8B4513, #654321, #734212);
+    width: 35px;
+    height: 35px;
+}
+
+/* Centro de gardenia */
+.center.gardenia {
+    background: 
+        radial-gradient(circle at 30% 30%, #FFFFF0, transparent 30%),
+        radial-gradient(circle at 70% 70%, #FFF8DC, transparent 30%),
+        radial-gradient(circle, #FFFFF0, #FFF8DC, #FAFAD2);
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Centro de rosa */
+.center.rose {
+    background: 
+        radial-gradient(circle at 30% 30%, #990033, transparent 30%),
+        radial-gradient(circle at 70% 70%, #CC0066, transparent 30%),
+        radial-gradient(circle, #990033, #CC0066, #800020);
+    width: 18px;
+    height: 18px;
+}
+
+/* Centro de margarita */
+.center.daisy {
+    background: 
+        radial-gradient(circle at 30% 30%, #FFD700, transparent 30%),
+        radial-gradient(circle at 70% 70%, #FFCC00, transparent 30%),
+        radial-gradient(circle, #FFD700, #FFCC00, #E6B800);
+    width: 25px;
+    height: 25px;
+}
+
+/* Centro de tulipán */
+.center.tulip {
+    background: 
+        radial-gradient(circle at 30% 30%, #330000, transparent 30%),
+        radial-gradient(circle at 70% 70%, #660000, transparent 30%),
+        radial-gradient(circle, #330000, #660000, #220000);
+    width: 15px;
+    height: 15px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.leaf {
+    position: absolute;
+    background: linear-gradient(to bottom, #32CD32, #228B22);
+    border-radius: 50% 0;
+    transform-origin: center;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    animation: leafGrowth 1s ease-out forwards;
+    opacity: 0;
+    bottom: 0; /* Posición base corregida */
+}
+
+@keyframes leafGrowth {
+    0% { 
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1) rotate(var(--leaf-rotation));
+    }
+}
+
+.leaf::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50% 0;
+}
+
+/* Animación de apertura de pétalos */
+@keyframes petalOpen {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) rotate(var(--petal-rotation)) scale(0.1);
+    }
+    70% {
+        opacity: 0.8;
+        transform: translateY(-5px) rotate(var(--petal-rotation)) scale(1.05);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(0) rotate(var(--petal-rotation)) scale(1);
+    }
+}
+
+.controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 95%;
+    max-width: 900px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+}
+
+button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button.active {
+    background: #FF6B6B;
+}
+
+.sun {
+    position: absolute;
+    top: 40px;
+    left: -100px;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #FFD700, #FF8C00);
+    border-radius: 50%;
+    box-shadow: 0 0 40px #FFD700;
+    animation: moveSun 60s linear infinite;
+    z-index: 5;
+    transition: all 2s ease;
+}
+
+.moon {
+    position: absolute;
+    top: 40px;
+    left: -100px;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #E6E6FA, #C0C0C0);
+    border-radius: 50%;
+    box-shadow: 0 0 30px #FFFFFF;
+    z-index: 5;
+    opacity: 0;
+    animation: moveMoon 60s linear infinite;
+    transition: all 2s ease;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    opacity: 0;
+    transition: opacity 5s ease;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+    transition: all 1s ease;
+}
+
+@keyframes moveSun {
+    0% {
+        left: -100px;
+        top: 40px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    45% {
+        opacity: 1;
+    }
+    50% {
+        left: calc(100% + 100px);
+        top: 40px;
+        opacity: 0;
+    }
+    100% {
+        left: calc(100% + 100px);
+        top: 40px;
+        opacity: 0;
+    }
+}
+
+@keyframes moveMoon {
+    0% {
+        left: -100px;
+        top: 40px;
+        opacity: 0;
+    }
+    50% {
+        left: -100px;
+        top: 40px;
+        opacity: 0;
+    }
+    60% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        left: calc(100% + 100px);
+        top: 40px;
+        opacity: 0;
+    }
+}
+
+@keyframes twinkle {
+    0% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.day-night-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    transition: all 0.3s;
+}
+
+.day-night-toggle:hover {
+    transform: scale(1.05);
+}
+
+/* Efectos de partículas */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: floatParticle 15s infinite linear;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(20px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Efectos de luz */
+.light-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 30%, rgba(255, 255, 255, 0.1) 70%);
+    pointer-events: none;
+    z-index: 6;
+    opacity: 0.5;
+    transition: all 3s ease;
+}
+
+body.night .light-effect {
+    background: radial-gradient(circle at center, transparent 30%, rgba(255, 255, 255, 0.05) 70%);
+    opacity: 0.3;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .instructions {
+        font-size: 1rem;
+    }
+    
+    .garden-container {
+        height: 45vh;
+        min-height: 300px;
+    }
+    
+    .sun, .moon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    button {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+    
+    .header {
+        padding: 15px;
+    }
+    
+    .ground {
+        height: 12%;
+    }
+    
+    .grass {
+        bottom: 12%;
+        height: 4%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.7rem;
+    }
+    
+    .garden-container {
+        height: 40vh;
+        min-height: 250px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button {
+        width: 80%;
+        margin-bottom: 5px;
+    }
+    
+    .sun, .moon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .ground {
+        height: 10%;
+    }
+    
+    .grass {
+        bottom: 10%;
+        height: 4%;
+    }
+    
+    .day-night-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}
